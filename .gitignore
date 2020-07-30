@@ -1,0 +1,6 @@
+.idea
+.pytest_cache
+db.sqlite3
+drivers
+*.pyc
+__pycache__
