@@ -10,6 +10,7 @@ django = "*"
 selenium = "*"
 pytest-selenium = "*"
 pytest-sugar = "*"
+pytest-django = "*"
 
 [requires]
 python_version = "3.8"
