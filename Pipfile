@@ -9,7 +9,6 @@ verify_ssl = true
 django = "*"
 selenium = "*"
 pytest-selenium = "*"
-pytest-sugar = "*"
 pytest-django = "*"
 
 [requires]

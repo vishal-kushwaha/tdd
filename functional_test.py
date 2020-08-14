@@ -2,7 +2,6 @@ import time
 
 from selenium.webdriver.chrome.webdriver import WebDriver
 
-
 from selenium import webdriver
 import unittest
 
@@ -44,13 +43,22 @@ class NewVisitorTest(unittest.TestCase):
 
         # There is still a text box inviting her to add another item. She enters "Use peacock feathers to make a fly"
         # (Edith is very methodical)
-        self.fail('Finish the test!')
+        input_box = self.browser.find_element_by_id('id_new_item')
+        input_box.send_keys('Use peacock feathers to make a fly')
+        input_box.send_keys(Keys.ENTER)
+        time.sleep(1)
 
         # The page updates again, and now shows both items on her list
-
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+        self.assertIn(
+            '2: Use peacock feathers to make a fly',
+            [row.text for row in rows]
+        )
         # Edith wonders whether the site will remember her list. Then she sees that the site has generated a unique URL
         # for her -- there is some explanatory text to that effect.
-
+        self.fail('Finish the test!')
         # She visits that URL - her to-do list is still there.
 
         # Satisfied, she goes back to sleep
@@ -79,16 +87,24 @@ def test_can_start_a_list_and_retrieve_it_later(selenium: WebDriver) -> None:
 
     table = selenium.find_element_by_id('id_list_table')
     rows = table.find_elements_by_tag_name('tr')
-    assert any(row.text == '1: Buy peacock feathers' for row in rows)
+    assert '1: Buy peacock feathers' in [row.text for row in rows]
 
     # There is still a text box inviting her to add another item. She enters "Use peacock feathers to make a fly"
     # (Edith is very methodical)
-    raise AssertionError('Finish the test')
+    input_box = selenium.find_element_by_id('id_new_item')
+    input_box.send_keys('Use peacock feathers to make a fly')
+    input_box.send_keys(Keys.ENTER)
+    time.sleep(1)
 
     # The page updates again, and now shows both items on her list
-
+    table = selenium.find_element_by_id('id_list_table')
+    rows = table.find_elements_by_tag_name('tr')
+    to_do_items = [row.text for row in rows]
+    assert '1: Buy peacock feathers' in to_do_items
+    assert '2: Use peacock feathers to make a fly' in to_do_items
     # Edith wonders whether the site will remember her list. Then she sees that the site has generated a unique URL for
     # her -- there is some explanatory text to that effect.
+    raise AssertionError('Finish the test')
 
     # She visits that URL - her to-do list is still there.
 
