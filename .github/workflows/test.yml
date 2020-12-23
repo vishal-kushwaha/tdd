@@ -10,6 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: test path
+        env:
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          echo $BRANCH
+          echo ${{ github.event.pull_request.head.ref }}
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
