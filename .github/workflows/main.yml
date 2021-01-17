@@ -12,6 +12,9 @@ jobs:
   printInputs:
     runs-on: ubuntu-latest
     steps:
-    - run: |
+    - name: test
+      timeout-minutes: 1
+      run: |
         echo "Log level: ${{ github.event.inputs.logLevel }}"
         echo "Tags: ${{ github.event.inputs.tags }}" 
+        sleep 70
